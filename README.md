@@ -1,6 +1,6 @@
-# BloxSLM
+# Light-WeightLM
 
-A small language model built from scratch, designed for **air-gapped, low-resource deployment**.
+A small language model built from scratch, designed for **light-weight internal systems** with **air-gapped, low-resource deployment**.
 
 ## Target Hardware
 
@@ -12,11 +12,11 @@ A small language model built from scratch, designed for **air-gapped, low-resour
 | Storage | 50 GB SSD | 200 GB NVMe SSD |
 | OS | Windows 10 / Ubuntu 20.04 | Ubuntu 22.04 LTS |
 
-> **Air-gapped**: BloxSLM is designed to run with **zero internet access** post-installation. All weights, tokenizer assets, and dependencies are bundled locally.
+> **Air-gapped**: Light-WeightLM is designed to run with **zero internet access** post-installation. All weights, tokenizer assets, and dependencies are bundled locally.
 
 ## Architecture Overview
 
-BloxSLM uses a decoder-only transformer architecture tuned for CPU inference:
+Light-WeightLM uses a decoder-only transformer architecture tuned for CPU inference:
 
 - **Parameters**: ~125M–350M (configurable via `configs/`)
 - **Attention**: Multi-head attention with optional sliding window for memory efficiency
@@ -27,7 +27,7 @@ BloxSLM uses a decoder-only transformer architecture tuned for CPU inference:
 ## Project Structure
 
 ```
-BloxSLM/
+Light-WeightLM/
 ├── src/
 │   ├── model/          # Transformer architecture
 │   ├── tokenizer/      # BPE tokenizer
@@ -46,8 +46,8 @@ BloxSLM/
 
 ```bash
 # 1. Clone
-git clone https://github.com/Bloxware/BloxSLM.git
-cd BloxSLM
+git clone https://github.com/blockkaaron/Light-WeightLM.git
+cd Light-WeightLM
 
 # 2. Create virtual environment (Python 3.11+)
 python -m venv .venv
