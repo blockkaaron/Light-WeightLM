@@ -73,6 +73,7 @@ python -m src.inference.generate --checkpoint checkpoints/latest/ --prompt "Hell
 - [Hardware & Performance](docs/hardware.md) — profiling on target hardware
 - [Training Guide](docs/training.md) — data prep, tokenizer training, model training
 - [Inference Guide](docs/inference.md) — deployment, quantization, benchmarks
+- [Benchmarking Guide](docs/benchmarking.md) — speed, perplexity, memory, and report generation
 - [Configuration Reference](docs/config-reference.md) — all config options explained
 
 ## Development
