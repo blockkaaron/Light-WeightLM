@@ -1,0 +1,32 @@
+# Tiny config — fast iteration and unit tests (~20M params)
+model:
+  vocab_size: 8192
+  n_layers: 6
+  n_heads: 6
+  d_model: 384
+  d_ffn: 1024
+  max_seq_len: 512
+  dropout: 0.1
+  rope_theta: 10000.0
+
+train:
+  batch_size: 8
+  grad_accum: 2
+  lr: 3.0e-4
+  lr_schedule: cosine
+  warmup_steps: 100
+  max_steps: 5000
+  grad_clip: 1.0
+  weight_decay: 0.1
+  dtype: float32
+  save_every: 500
+  seed: 42
+
+inference:
+  max_new_tokens: 200
+  temperature: 0.8
+  top_k: 0
+  top_p: 0.9
+  repetition_penalty: 1.0
+  device: cpu
+  dtype: float32

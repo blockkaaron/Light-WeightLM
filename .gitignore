@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+env/
+venv/
+.venv/
+ENV/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Model artifacts (large files)
+*.bin
+*.pt
+*.pth
+*.safetensors
+*.gguf
+*.ggml
+checkpoints/
+runs/
+wandb/
+
+# Data (large files — use data/README.md to document sources)
+data/raw/
+data/processed/
+data/tokenized/
+*.jsonl
+*.parquet
+*.arrow
+*.hdf5
+
+# Tokenizer compiled artifacts
+tokenizer/vocab.json
+tokenizer/merges.txt
+tokenizer/*.model
+
+# Config overrides (keep defaults, ignore local overrides)
+configs/local/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Secrets / credentials
+.env
+*.key
+*.pem
+
+# Logs
+logs/
+*.log

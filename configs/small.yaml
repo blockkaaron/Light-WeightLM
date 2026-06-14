@@ -1,0 +1,33 @@
+# Small config — primary development target (~125M params)
+# Target hardware: 8th-gen i7, 32 GB RAM, no GPU
+model:
+  vocab_size: 8192
+  n_layers: 12
+  n_heads: 12
+  d_model: 768
+  d_ffn: 2048
+  max_seq_len: 1024
+  dropout: 0.1
+  rope_theta: 10000.0
+
+train:
+  batch_size: 4
+  grad_accum: 4
+  lr: 3.0e-4
+  lr_schedule: cosine
+  warmup_steps: 1000
+  max_steps: 100000
+  grad_clip: 1.0
+  weight_decay: 0.1
+  dtype: float32
+  save_every: 1000
+  seed: 42
+
+inference:
+  max_new_tokens: 200
+  temperature: 0.8
+  top_k: 0
+  top_p: 0.9
+  repetition_penalty: 1.0
+  device: cpu
+  dtype: int8
