@@ -8,10 +8,10 @@ import torch
 from omegaconf import OmegaConf
 from safetensors.torch import load_file
 
-from src.model import BloxSLM, BloxSLMConfig
+from src.model import LWLM, LWLMConfig
 
 
-def load_model(checkpoint_dir: Path, device: str = "cpu") -> tuple[BloxSLM, object]:
+def load_model(checkpoint_dir: Path, device: str = "cpu") -> tuple[LWLM, object]:
     """Load model and config from a checkpoint directory."""
     checkpoint_dir = Path(checkpoint_dir)
 
@@ -21,7 +21,7 @@ def load_model(checkpoint_dir: Path, device: str = "cpu") -> tuple[BloxSLM, obje
         checkpoint_dir = checkpoint_dir / latest_name
 
     cfg = OmegaConf.load(checkpoint_dir / "config.yaml")
-    model_cfg = BloxSLMConfig(
+    model_cfg = LWLMConfig(
         vocab_size=cfg.model.vocab_size,
         n_layers=cfg.model.n_layers,
         n_heads=cfg.model.n_heads,
@@ -29,7 +29,7 @@ def load_model(checkpoint_dir: Path, device: str = "cpu") -> tuple[BloxSLM, obje
         d_ffn=cfg.model.d_ffn,
         max_seq_len=cfg.model.max_seq_len,
     )
-    model = BloxSLM(model_cfg)
+    model = LWLM(model_cfg)
     state = load_file(checkpoint_dir / "model.safetensors")
     model.load_state_dict(state)
     model.to(torch.device(device))

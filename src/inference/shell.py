@@ -21,7 +21,7 @@ def main():
     parser.add_argument("--max-tokens", type=int, default=300)
     args = parser.parse_args()
 
-    console.print(f"[bold green]BloxSLM[/] loading from [dim]{args.checkpoint}[/] ...")
+    console.print(f"[bold green]LWLM[/] loading from [dim]{args.checkpoint}[/] ...")
     engine = InferenceEngine(args.checkpoint, device=args.device)
     console.print("[bold green]Ready.[/] Type [bold]exit[/] to quit.\n")
 

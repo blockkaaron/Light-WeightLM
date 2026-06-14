@@ -1,5 +1,5 @@
 """
-CPU-optimized inference engine for BloxSLM.
+CPU-optimized inference engine for LWLM.
 
 Key decisions:
 - KV cache pre-allocated as a fixed tensor (no list growth)
@@ -17,7 +17,7 @@ import torch.nn.functional as F
 from omegaconf import OmegaConf
 from safetensors.torch import load_file
 
-from src.model import BloxSLM, BloxSLMConfig
+from src.model import LWLM, LWLMConfig
 from src.tokenizer import BPETokenizer
 
 
@@ -26,7 +26,7 @@ class InferenceEngine:
         checkpoint_dir = Path(checkpoint_dir)
         cfg = OmegaConf.load(checkpoint_dir / "config.yaml")
 
-        self.model_cfg = BloxSLMConfig(
+        self.model_cfg = LWLMConfig(
             vocab_size=cfg.model.vocab_size,
             n_layers=cfg.model.n_layers,
             n_heads=cfg.model.n_heads,
@@ -36,7 +36,7 @@ class InferenceEngine:
         )
 
         self.device = torch.device(device)
-        self.model = BloxSLM(self.model_cfg)
+        self.model = LWLM(self.model_cfg)
         state = load_file(checkpoint_dir / "model.safetensors")
         self.model.load_state_dict(state)
         self.model.to(self.device)

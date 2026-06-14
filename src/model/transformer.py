@@ -1,5 +1,5 @@
 """
-Core transformer model for BloxSLM.
+Core transformer model for LWLM.
 
 Architecture: decoder-only transformer with RoPE, RMSNorm, and SwiGLU FFN.
 Targets CPU inference on 8th-gen i7 / 32 GB RAM.
@@ -17,7 +17,7 @@ import torch.nn.functional as F
 
 
 @dataclass
-class BloxSLMConfig:
+class LWLMConfig:
     vocab_size: int = 8192
     n_layers: int = 12
     n_heads: int = 12
@@ -69,7 +69,7 @@ def apply_rope(x: torch.Tensor, rope: torch.Tensor) -> torch.Tensor:
 
 
 class MultiHeadAttention(nn.Module):
-    def __init__(self, cfg: BloxSLMConfig):
+    def __init__(self, cfg: LWLMConfig):
         super().__init__()
         self.n_heads = cfg.n_heads
         self.head_dim = cfg.head_dim()
@@ -119,7 +119,7 @@ class MultiHeadAttention(nn.Module):
 
 
 class SwiGLUFFN(nn.Module):
-    def __init__(self, cfg: BloxSLMConfig):
+    def __init__(self, cfg: LWLMConfig):
         super().__init__()
         self.w1 = nn.Linear(cfg.d_model, cfg.d_ffn, bias=False)
         self.w2 = nn.Linear(cfg.d_ffn, cfg.d_model, bias=False)
@@ -130,7 +130,7 @@ class SwiGLUFFN(nn.Module):
 
 
 class TransformerBlock(nn.Module):
-    def __init__(self, cfg: BloxSLMConfig):
+    def __init__(self, cfg: LWLMConfig):
         super().__init__()
         self.norm1 = RMSNorm(cfg.d_model)
         self.attn = MultiHeadAttention(cfg)
@@ -150,8 +150,8 @@ class TransformerBlock(nn.Module):
         return x, new_kv
 
 
-class BloxSLM(nn.Module):
-    def __init__(self, cfg: BloxSLMConfig):
+class LWLM(nn.Module):
+    def __init__(self, cfg: LWLMConfig):
         super().__init__()
         self.cfg = cfg
 

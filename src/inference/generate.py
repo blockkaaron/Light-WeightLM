@@ -9,7 +9,7 @@ from .engine import InferenceEngine
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate text with BloxSLM")
+    parser = argparse.ArgumentParser(description="Generate text with LWLM")
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--prompt", type=str, default="Hello")
     parser.add_argument("--max-tokens", type=int, default=200)
@@ -22,7 +22,7 @@ def main():
 
     engine = InferenceEngine(args.checkpoint, device=args.device)
 
-    print(f"\n--- BloxSLM ---\nPrompt: {args.prompt}\n")
+    print(f"\n--- LWLM ---\nPrompt: {args.prompt}\n")
     for token_text in engine.stream(
         args.prompt,
         max_new_tokens=args.max_tokens,

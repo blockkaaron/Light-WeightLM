@@ -1,3 +1,3 @@
-from .transformer import BloxSLM, BloxSLMConfig
+from .transformer import LWLM, LWLMConfig
 
-__all__ = ["BloxSLM", "BloxSLMConfig"]
+__all__ = ["LWLM", "LWLMConfig"]

@@ -9,7 +9,7 @@
 
 ## Model Family
 
-BloxSLM is a **decoder-only transformer** (autoregressive, left-to-right).  
+LWLM is a **decoder-only transformer** (autoregressive, left-to-right).  
 This matches GPT-2 / LLaMA lineage and is the most mature architecture for text generation.
 
 ### Parameter Targets

@@ -4,7 +4,7 @@ import math
 import torch
 import pytest
 
-from src.model import BloxSLM, BloxSLMConfig
+from src.model import LWLM, LWLMConfig
 from src.tokenizer.bpe import BPETokenizer, SPECIAL_TOKENS
 
 
@@ -13,10 +13,10 @@ def _tiny_engine():
     from src.inference.engine import InferenceEngine
     import types
 
-    cfg = BloxSLMConfig(
+    cfg = LWLMConfig(
         vocab_size=256, n_layers=2, n_heads=4, d_model=64, d_ffn=128, max_seq_len=64
     )
-    model = BloxSLM(cfg)
+    model = LWLM(cfg)
     model.eval()
 
     chars = list("abcdefghijklmnopqrstuvwxyz .,")

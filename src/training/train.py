@@ -1,5 +1,5 @@
 """
-Pre-training loop for BloxSLM.
+Pre-training loop for LWLM.
 
 Usage:
     python -m src.training.train --config configs/small.yaml --data data/tokenized/
@@ -17,7 +17,7 @@ import torch.nn as nn
 from omegaconf import OmegaConf
 from torch.optim import AdamW
 
-from src.model import BloxSLM, BloxSLMConfig
+from src.model import LWLM, LWLMConfig
 from .dataset import TokenDataset
 
 
@@ -36,7 +36,7 @@ def build_lr_schedule(cfg, optimizer: AdamW):
     return torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
 
 
-def save_checkpoint(model: BloxSLM, optimizer: AdamW, step: int, cfg, output_dir: Path):
+def save_checkpoint(model: LWLM, optimizer: AdamW, step: int, cfg, output_dir: Path):
     from safetensors.torch import save_file
     step_dir = output_dir / f"step-{step:07d}"
     step_dir.mkdir(parents=True, exist_ok=True)
@@ -56,7 +56,7 @@ def train(cfg_path: Path, data_dir: Path, output_dir: Path, resume: Path | None)
     dtype = torch.bfloat16 if cfg.train.dtype == "bfloat16" and device.type == "cuda" else torch.float32
     print(f"Device: {device}  dtype: {dtype}")
 
-    model_cfg = BloxSLMConfig(
+    model_cfg = LWLMConfig(
         vocab_size=cfg.model.vocab_size,
         n_layers=cfg.model.n_layers,
         n_heads=cfg.model.n_heads,
@@ -66,7 +66,7 @@ def train(cfg_path: Path, data_dir: Path, output_dir: Path, resume: Path | None)
         dropout=cfg.model.get("dropout", 0.1),
     )
 
-    model = BloxSLM(model_cfg).to(device=device, dtype=dtype)
+    model = LWLM(model_cfg).to(device=device, dtype=dtype)
     print(f"Parameters: {model.param_count() / 1e6:.1f}M")
 
     optimizer = AdamW(

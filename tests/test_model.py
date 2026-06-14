@@ -3,12 +3,12 @@
 import torch
 import pytest
 
-from src.model import BloxSLM, BloxSLMConfig
+from src.model import LWLM, LWLMConfig
 
 
 @pytest.fixture
 def tiny_cfg():
-    return BloxSLMConfig(
+    return LWLMConfig(
         vocab_size=256,
         n_layers=2,
         n_heads=4,
@@ -19,7 +19,7 @@ def tiny_cfg():
 
 
 def test_forward_shape(tiny_cfg):
-    model = BloxSLM(tiny_cfg)
+    model = LWLM(tiny_cfg)
     input_ids = torch.randint(0, tiny_cfg.vocab_size, (2, 16))
     logits, kv_caches = model(input_ids)
     assert logits.shape == (2, 16, tiny_cfg.vocab_size)
@@ -28,7 +28,7 @@ def test_forward_shape(tiny_cfg):
 
 def test_kv_cache_consistency(tiny_cfg):
     """Single-step inference with KV cache must match full-sequence output."""
-    model = BloxSLM(tiny_cfg)
+    model = LWLM(tiny_cfg)
     model.eval()
     torch.manual_seed(0)
 
@@ -46,10 +46,10 @@ def test_kv_cache_consistency(tiny_cfg):
 
 
 def test_param_count(tiny_cfg):
-    model = BloxSLM(tiny_cfg)
+    model = LWLM(tiny_cfg)
     assert model.param_count() > 0
 
 
 def test_weight_tying(tiny_cfg):
-    model = BloxSLM(tiny_cfg)
+    model = LWLM(tiny_cfg)
     assert model.lm_head.weight is model.token_emb.weight
